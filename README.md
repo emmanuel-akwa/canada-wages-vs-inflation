@@ -2,7 +2,7 @@
 
 An end-to-end analytics project using **SQL (PostgreSQL on Neon)** and **Power BI** to test whether Canadian wages kept pace with inflation between January 2018 and July 2026.
 
-![Dashboard](dashboard.png)
+![Dashboard](Dashboard.png)
 
 ## Question
 
@@ -21,10 +21,10 @@ Contains information licensed under the Statistics Canada Open Licence.
 
 ## Method
 
-1. **Load.** Imported the two raw CSV files (1,577 CPI rows and 2,268 wage rows) into PostgreSQL staging tables with every column as text, so the import cannot fail on odd values (`sql/01_create_raw_tables.sql`).
-2. **Check.** Verified row counts, categories and date ranges before building on the data (`sql/02_data_checks.sql`).
-3. **Clean and transform.** Used SQL common table expressions (CTEs) to filter to one series per table, convert text to real dates and numbers (`TO_DATE`, `NULLIF`, `TRIM`, `::NUMERIC`), join the series by month, and calculate year-over-year change with the `LAG()` window function. Saved the result as a view, `wages_vs_inflation` (`sql/03_create_view.sql`).
-4. **Analyze.** Queried the view for the headline results (`sql/04_findings.sql`).
+1. **Load.** Imported the two raw CSV files (1,577 CPI rows and 2,268 wage rows) into PostgreSQL staging tables with every column as text, so the import cannot fail on odd values (`SQL/01_create_raw_tables.sql`).
+2. **Check.** Verified row counts, categories and date ranges before building on the data (`SQL/02_data_checks.sql`).
+3. **Clean and transform.** Used SQL common table expressions (CTEs) to filter to one series per table, convert text to real dates and numbers (`TO_DATE`, `NULLIF`, `TRIM`, `::NUMERIC`), join the series by month, and calculate year-over-year change with the `LAG()` window function. Saved the result as a view, `wages_vs_inflation` (`SQL/03_create_view.sql`).
+4. **Analyze.** Queried the view for the headline results (`SQL/04_findings.sql`).
 5. **Visualize.** Connected Power BI directly to the view and built the dashboard.
 
 Real wage growth is wage growth minus inflation, in percentage points. A negative value means prices grew faster than pay.
@@ -62,11 +62,11 @@ PostgreSQL (Neon), SQL (CTEs, joins, window functions, views), DBeaver, Power BI
 ## Repository contents
 
 ```
-sql/
+SQL/
   01_create_raw_tables.sql
   02_data_checks.sql
   03_create_view.sql
   04_findings.sql
-dashboard.png
+Dashboard.png
 README.md
 ```
